@@ -1,0 +1,65 @@
+/* general setting */
+body {
+  margin: 5% auto;
+  max-width: 1000px;
+  font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.9;
+  text-align: center;
+}
+
+.appDisplay {
+  border: 1.5px solid rgba(182, 188, 195, 0.4);
+  border-radius: 8px;
+  box-shadow: 0px 15px 45px 10px rgba(0, 0, 0, 0.2);
+  background: rgba(245, 245, 236, 0.5);
+}
+
+/* left-side block */
+.left_block {
+  background-image: url("../img/bkgrnd2.jpeg");
+  border-radius: 8px;
+  background-size: cover;
+}
+
+.navbg,
+.locationBtn {
+  background-color: rgba(225, 222, 222, 0.2);
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+.locationBtn {
+  color: #fff;
+  opacity: 0.7;
+}
+
+input::placeholder {
+  color: rgb(223, 219, 219);
+  opacity: 0.7;
+}
+
+section {
+  margin-top: 20%;
+  opacity: 0.8;
+}
+
+p,
+.date {
+  color: #fff;
+  letter-spacing: 2px;
+  font-size: 16px;
+}
+
+p {
+  font-weight: 600;
+}
+h1 {
+  font-weight: 700;
+  font-size: 50px;
+}
+.date {
+  margin-top: 30%;
+}
+
+/* right-side block */
