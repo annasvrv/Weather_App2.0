@@ -63,3 +63,31 @@ h1 {
 }
 
 /* right-side block */
+
+.right_block {
+  opacity: 0.9;
+}
+
+h2,
+.gitlink {
+  text-align: left;
+}
+
+.today-header {
+  display: inline;
+}
+.units {
+  position: relative;
+  top: 10px;
+}
+
+a {
+  text-decoration: none;
+}
+.units a {
+  font-size: 23px;
+  /* font-weight: 600; */
+}
+.forecast-header {
+  margin-top: 10px;
+}
