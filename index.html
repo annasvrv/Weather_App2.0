@@ -59,7 +59,7 @@
               </form>
               <section>
                 <p>Weather you go...</p>
-                <h1>Your City</h1>
+                <h1 id="city">Your City</h1>
                 <div class="date" id="date">
                   <div class="weekDay" id="weekDay">Thursday</div>
                   <div class="clock" id="clock">June 25 2022 13:55</div>
@@ -73,26 +73,37 @@
                 <h2 class="today-header">Today</h2>
                 <span class="units"> <a href="">ºC</a> <a href="">ºF</a> </span>
               </div>
-              <div class="card  weatherDisplay">
+              <div class="card weatherDisplay">
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-6  verticalLine">
+                    <div class="col-6 verticalLine">
                       <div class="currentWeather">
-                        <span class="temperature">30</span
+                        <span class="temperature" id="temperature">30</span
                         ><span class="currentUnit">ºC</span>
-                        <img src="" alt="sun" />
+                        <img src="" alt="sun" id="icon" />
                       </div>
                       <div class="high-low">
-                        <span class="high">H:31ºC</span><span class="low">L:23ºC</span>
+                        <span class="high" id="high">H:31ºC</span
+                        ><span class="low" id="low">L:23ºC</span>
                       </div>
                     </div>
-                    <div class="col-6 ">
+                    <div class="col-6">
                       <ul class="conditions-list">
-                        <li class="condition">Condition: <span>Haze</span></li>
-                        <li class="condition">Wind: <span>1.5 m/s</span></li>
-                        <li class="condition">Real feel: <span>23ºC</span></li>
-                        <li class="condition">Humidity: <span>69%</span></li>
-                        <li class="condition">Pressure: <span>1017 hPa</span></li>
+                        <li class="condition">
+                          Condition: <span class="weatherCond" id="condition">Haze</span>
+                        </li>
+                        <li class="condition">
+                          Wind: <span id="wind">1.5</span> m/s
+                        </li>
+                        <li class="condition">
+                          Real feel: <span id="realFeel">23</span>ºC
+                        </li>
+                        <li class="condition">
+                          Humidity: <span id="humidity">69</span>%
+                        </li>
+                        <li class="condition">
+                          Pressure: <span id="pressure">1017</span> hPa
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -111,5 +122,6 @@
         S
       </div>
     </div>
+    <script src="./src/script.js"></script>
   </body>
 </html>

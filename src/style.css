@@ -143,6 +143,10 @@ a {
   text-align: left;
 }
 
+.weatherCond {
+  text-transform: capitalize;
+}
+
 .gitlink {
   font-size: 14px;
 }
