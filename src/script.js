@@ -1,5 +1,5 @@
 function formatWeek(timestamp) {
-  let date = new Date(timestamp);
+  let date1 = new Date(timestamp);
   let days = [
     "Sunday",
     "Monday",
@@ -9,17 +9,17 @@ function formatWeek(timestamp) {
     "Friday",
     "Saturday",
   ];
-  let weekDay = days[date.getDay()];
+  let weekDay = days[date1.getDay()];
   return `${weekDay}`;
 }
 
 function formatDay(timestamp) {
-  let date = new Date(timestamp);
-  let hours = date.getHours();
+  let date2 = new Date(timestamp);
+  let hours = date2.getHours();
   if (hours < 10) {
     hours = "0" + hours;
   }
-  let minutes = date.getMinutes();
+  let minutes = date2.getMinutes();
   if (minutes < 10) {
     minutes = "0" + minutes;
   }
@@ -37,14 +37,14 @@ function formatDay(timestamp) {
     "November",
     "December",
   ];
-  let month = months[date.getMonth()];
-  let day = date.getDate();
-  let year = date.getFullYear();
+  let month = months[date2.getMonth()];
+  let day = date2.getDate();
+  let year = date2.getFullYear();
   return `${month} ${day} ${year} ${hours}:${minutes}`;
 }
 
 function showTempCity(response) {
-  // console.log(response.data);
+  console.log(response.data);
   let tempElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
   let highTemp = document.querySelector("#high");
@@ -56,6 +56,7 @@ function showTempCity(response) {
   let pressureElement = document.querySelector("#pressure");
   let weekdayElement = document.querySelector("#weekDay");
   let dateElement = document.querySelector("#clock");
+  let iconElement = document.querySelector("#icon");
 
   tempElement.innerHTML = Math.round(response.data.main.temp);
   cityElement.innerHTML = response.data.name;
@@ -66,8 +67,13 @@ function showTempCity(response) {
   feelElement.innerHTML = Math.round(response.data.main.feels_like);
   humidElement.innerHTML = response.data.main.humidity;
   pressureElement.innerHTML = response.data.main.pressure;
-  dateElement.innerHTML = formatDay(response.data.dt * 1000);
   weekdayElement.innerHTML = formatWeek(response.data.dt * 1000);
+  dateElement.innerHTML = formatDay(response.data.dt * 1000);
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
 let apiKey = "74a1988810687be79d98c8fd17e5884a";
