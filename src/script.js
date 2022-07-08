@@ -91,6 +91,8 @@ function search(city) {
 function displayCity(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#citySearch-input").value;
+  linkUnitF.classList.remove("active");
+  linkUnitC.classList.add("active");
   search(cityInputElement);
 }
 
@@ -133,13 +135,13 @@ let currentHigh = null;
 let currentLow = null;
 let currentFeel = null;
 
-let form = document.querySelector("#searchCity-form");
-form.addEventListener("submit", displayCity);
-
 let linkUnitF = document.querySelector("#unitF");
 linkUnitF.addEventListener("click", showUnitFtemp);
 
 let linkUnitC = document.querySelector("#unitC");
 linkUnitC.addEventListener("click", showUnitCtemp);
+
+let form = document.querySelector("#searchCity-form");
+form.addEventListener("submit", displayCity);
 
 search("Los Angeles");
