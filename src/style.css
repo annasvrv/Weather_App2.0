@@ -159,6 +159,10 @@ img {
   .high-low {
     margin-top: 30%;
   }
+
+  .conditions-list {
+    font-size: 14px;
+  }
 }
 
 .high-low {
