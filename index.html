@@ -72,20 +72,22 @@
             <div class="card-body">
               <div class="header d-flex justify-content-between">
                 <h2 class="today-header">Today</h2>
-                <span class="units"> <a href="">ºC</a> <a href="">ºF</a> </span>
+                <span class="units">
+                  <a href="#" id="unitC" class="active">ºC</a> <a href="#" id="unitF">ºF</a>
+                </span>
               </div>
               <div class="card weatherDisplay">
                 <div class="card-body">
                   <div class="row">
                     <div class="col-6 verticalLine">
                       <div class="currentWeather">
-                        <span class="temperature" id="temperature">30</span
-                        ><span class="currentUnit">ºC</span>
+                        <span class="temperature" id="temperature"></span
+                        ><span class="currentUnit" id="currentUnit"></span>
                         <img src="" alt="" id="icon" />
                       </div>
                       <div class="high-low">
-                        <span class="high" id="high">H:31ºC</span
-                        ><span class="low" id="low">L:23ºC</span>
+                        <span class="high" id="high"></span
+                        ><span class="low" id="low"></span>
                       </div>
                     </div>
                     <div class="col-6">
@@ -98,7 +100,7 @@
                           Wind: <span id="wind">1.5</span> m/s
                         </li>
                         <li class="condition">
-                          Real feel: <span id="realFeel">23</span>ºC
+                          Real feel: <span id="realFeel">23</span>
                         </li>
                         <li class="condition">
                           Humidity: <span id="humidity">69</span>%

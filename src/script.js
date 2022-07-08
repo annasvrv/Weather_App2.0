@@ -44,7 +44,6 @@ function formatDay(timestamp) {
 }
 
 function showTempCity(response) {
-  console.log(response.data);
   let tempElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
   let highTemp = document.querySelector("#high");
@@ -57,14 +56,21 @@ function showTempCity(response) {
   let weekdayElement = document.querySelector("#weekDay");
   let dateElement = document.querySelector("#clock");
   let iconElement = document.querySelector("#icon");
+  let unit = document.querySelector("#currentUnit");
 
-  tempElement.innerHTML = Math.round(response.data.main.temp);
+  currentTemp = response.data.main.temp;
+  unit.innerHTML = `ºC`;
+  currentHigh = response.data.main.temp_max;
+  currentLow = response.data.main.temp_min;
+  currentFeel = response.data.main.feels_like;
+
+  tempElement.innerHTML = Math.round(currentTemp);
   cityElement.innerHTML = response.data.name;
-  highTemp.innerHTML = `H:${Math.round(response.data.main.temp_max)}ºC`;
-  lowTemp.innerHTML = `L:${Math.round(response.data.main.temp_min)}ºC`;
+  highTemp.innerHTML = `H:${Math.round(currentHigh)}ºC`;
+  lowTemp.innerHTML = `L:${Math.round(currentLow)}ºC`;
   conditionElement.innerHTML = response.data.weather[0].description;
   windElement.innerHTML = response.data.wind.speed;
-  feelElement.innerHTML = Math.round(response.data.main.feels_like);
+  feelElement.innerHTML = `${Math.round(currentFeel)}ºC`;
   humidElement.innerHTML = response.data.main.humidity;
   pressureElement.innerHTML = response.data.main.pressure;
   weekdayElement.innerHTML = formatWeek(response.data.dt * 1000);
@@ -85,9 +91,55 @@ function search(city) {
 function displayCity(event) {
   event.preventDefault();
   let cityInputElement = document.querySelector("#citySearch-input").value;
-  search(cityInputElement)
+  search(cityInputElement);
 }
-search("Los Angeles");
+
+function showUnitFtemp(event) {
+  event.preventDefault();
+  linkUnitC.classList.remove("active");
+  linkUnitF.classList.add("active");
+  let newTempF = Math.round((currentTemp * 9) / 5 + 32);
+  let temp = document.querySelector("#temperature");
+  let unit = document.querySelector("#currentUnit");
+  let high = document.querySelector("#high");
+  let low = document.querySelector("#low");
+  let feel = document.querySelector("#realFeel");
+
+  temp.innerHTML = newTempF;
+  unit.innerHTML = `ºF`;
+  high.innerHTML = `H:${Math.round((currentHigh * 9) / 5 + 32)}ºF`;
+  low.innerHTML = `L:${Math.round((currentLow * 9) / 5 + 32)}ºF`;
+  feel.innerHTML = `${Math.round((currentFeel * 9) / 5 + 32)}ºF`;
+}
+
+function showUnitCtemp(event) {
+  event.preventDefault();
+  linkUnitF.classList.remove("active");
+  linkUnitC.classList.add("active");
+  let temp = document.querySelector("#temperature");
+  let unit = document.querySelector("#currentUnit");
+  let high = document.querySelector("#high");
+  let low = document.querySelector("#low");
+  let feel = document.querySelector("#realFeel");
+  temp.innerHTML = Math.round(currentTemp);
+  unit.innerHTML = `ºC`;
+  high.innerHTML = `H:${Math.round(currentHigh)}ºC`;
+  low.innerHTML = `L:${Math.round(currentLow)}ºC`;
+  feel.innerHTML = `${Math.round(currentFeel)}ºC`;
+}
+
+let currentTemp = null;
+let currentHigh = null;
+let currentLow = null;
+let currentFeel = null;
 
 let form = document.querySelector("#searchCity-form");
 form.addEventListener("submit", displayCity);
+
+let linkUnitF = document.querySelector("#unitF");
+linkUnitF.addEventListener("click", showUnitFtemp);
+
+let linkUnitC = document.querySelector("#unitC");
+linkUnitC.addEventListener("click", showUnitCtemp);
+
+search("Los Angeles");
