@@ -141,6 +141,26 @@ img {
     top: -13px;
   }
 }
+
+@media screen and (max-width: 450px) {
+  .temperature {
+    font-size: 40px;
+  }
+  .currentUnit {
+    font-size: 14px;
+    position: relative;
+    top: -18px;
+  }
+  img {
+    width: 60px;
+    position: relative;
+    top: -8px;
+  }
+  .high-low {
+    margin-top: 20%;
+  }
+}
+
 .high-low {
   font-size: 16px;
   letter-spacing: 2px;
