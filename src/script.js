@@ -43,6 +43,35 @@ function formatDay(timestamp) {
   return `${month} ${day} ${year} ${hours}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast-display");
+
+  let forecastHTML = `<div class="row">`;
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `      
+                     <div class="col weekday">
+                        <div class="week-day">${day}</div>
+                        <div class="icon-forecast">
+                          <img
+                            src="http://openweathermap.org/img/wn/10d@2x.png"
+                            alt=""
+                            width="40px"
+                          />
+                        </div>
+                        <div class="temp-forecast">25º</div>
+                      </div>
+                    `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayData(response) {
   let tempElement = document.querySelector("#temperature");
   let cityElement = document.querySelector("#city");
@@ -82,6 +111,22 @@ function displayData(response) {
   iconElement.setAttribute("alt", response.data.weather[0].description);
 }
 
+function showMyPosition(position) {
+  let lat = position.coords.latitude;
+  let lon = position.coords.longitude;
+  let apiKey = "74a1988810687be79d98c8fd17e5884a";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}
+&lon=${lon}&units=metric&appid=${apiKey}`;
+  axios.get(apiUrl).then(displayData);
+}
+
+function myLocation(event) {
+  event.preventDefault();
+  linkUnitF.classList.remove("active");
+  linkUnitC.classList.add("active");
+  navigator.geolocation.getCurrentPosition(showMyPosition);
+}
+
 function search(city) {
   let apiKey = "74a1988810687be79d98c8fd17e5884a";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
@@ -94,22 +139,6 @@ function displayCity(event) {
   linkUnitF.classList.remove("active");
   linkUnitC.classList.add("active");
   search(cityInputElement);
-}
-
-function myLocation(event) {
-  event.preventDefault();
-  linkUnitF.classList.remove("active");
-  linkUnitC.classList.add("active");
-  navigator.geolocation.getCurrentPosition(showMyPosition);
-}
-
-function showMyPosition(position) {
-  let lat = position.coords.latitude;
-  let lon = position.coords.longitude;
-  let apiKey = "74a1988810687be79d98c8fd17e5884a";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}
-&lon=${lon}&units=metric&appid=${apiKey}`;
-  axios.get(apiUrl).then(displayData);
 }
 
 function showUnitFtemp(event) {
@@ -151,6 +180,8 @@ let currentHigh = null;
 let currentLow = null;
 let currentFeel = null;
 
+displayForecast();
+
 let linkUnitF = document.querySelector("#unitF");
 linkUnitF.addEventListener("click", showUnitFtemp);
 
@@ -162,7 +193,5 @@ currentLocation.addEventListener("click", myLocation);
 
 let form = document.querySelector("#searchCity-form");
 form.addEventListener("submit", displayCity);
-
-
 
 search("Los Angeles");
