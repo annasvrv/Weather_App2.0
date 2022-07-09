@@ -72,6 +72,10 @@ h2,
 .gitlink {
   text-align: left;
 }
+h2 {
+  font-size: 35px;
+  margin: 0;
+}
 
 .today-header {
   display: inline;
@@ -122,7 +126,7 @@ a {
   top: -30px;
 }
 
-img {
+.icon-today {
   position: relative;
   top: -18px;
 }
@@ -135,7 +139,7 @@ img {
     position: relative;
     top: -22px;
   }
-  img {
+  .icon-today {
     width: 80px;
     position: relative;
     top: -13px;
@@ -151,7 +155,7 @@ img {
     position: relative;
     top: -18px;
   }
-  img {
+  .icon-today {
     width: 70px;
     position: relative;
     top: -10px;
@@ -200,4 +204,12 @@ a .gitlink {
   opacity: 0.7;
   background-color: rgba(41, 108, 142, 0.2);
   border-color: rgb(41, 108, 142);
+}
+
+.forecast-card {
+  padding: 0;
+}
+
+.week-day {
+  font-weight: 600;
 }

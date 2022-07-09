@@ -84,7 +84,7 @@
                       <div class="currentWeather">
                         <span class="temperature" id="temperature"></span
                         ><span class="currentUnit" id="currentUnit"></span>
-                        <img src="" alt="" id="icon" />
+                        <img src="" alt="" id="icon" class="icon-today" />
                       </div>
                       <div class="high-low">
                         <span class="high" id="high"></span
@@ -115,8 +115,22 @@
                 </div>
               </div>
               <h2 class="forecast-header">Week forecast</h2>
-              <div class="card">
-                <div class="card-body"></div>
+              <div class="card weatherDisplay">
+                <div class="card-body forecast-card">
+                  <div class="row">
+                    <div class="col-2">
+                      <div class="week-day">Sun</div>
+                      <div class="icon-forecast">
+                        <img
+                          src="http://openweathermap.org/img/wn/10d@2x.png"
+                          alt=""
+                          width="40px"
+                        />
+                      </div>
+                      <div class="temp-forecast">25º</div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
