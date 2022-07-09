@@ -53,9 +53,7 @@ function formatWeekDay(timestamp) {
 
 function displayForecast(response) {
   let forecast = response.data.daily.slice(1, 8);
-
   let forecastElement = document.querySelector("#forecast-display");
-
   let forecastHTML = `<div class="row">`;
 
   forecast.forEach(function (forecastDay, i) {
@@ -70,14 +68,14 @@ function displayForecast(response) {
                         
                         <div class="icon-forecast">
                           <img
-                            src="http://openweathermap.org/img/wn/${
+                            src="https://openweathermap.org/img/wn/${
                               forecastDay.weather[0].icon
                             }@2x.png"
                             alt=""
                             width="40px"
                           />
                         </div>
-                        <div class="temp-forecast">${Math.round(
+                        <div class="temp-forecast" id="temp-forecast">${Math.round(
                           forecastDay.temp.day
                         )}º</div>
                       </div>
@@ -92,7 +90,7 @@ function displayForecast(response) {
 
 function getForecast(coordinates) {
   let apiKey = "74a1988810687be79d98c8fd17e5884a";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=metric&appid=${apiKey}`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=${apiunit}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayForecast);
 }
 
@@ -130,7 +128,7 @@ function displayData(response) {
   dateElement.innerHTML = formatDay(response.data.dt * 1000);
   iconElement.setAttribute(
     "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   iconElement.setAttribute("alt", response.data.weather[0].description);
 
@@ -142,7 +140,7 @@ function showMyPosition(position) {
   let lon = position.coords.longitude;
   let apiKey = "74a1988810687be79d98c8fd17e5884a";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}
-&lon=${lon}&units=metric&appid=${apiKey}`;
+&lon=${lon}&units=${apiunit}&appid=${apiKey}`;
   axios.get(apiUrl).then(displayData);
 }
 
@@ -155,7 +153,7 @@ function myLocation(event) {
 
 function search(city) {
   let apiKey = "74a1988810687be79d98c8fd17e5884a";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${apiunit}`;
   axios.get(apiUrl).then(displayData);
 }
 
@@ -171,6 +169,7 @@ function showUnitFtemp(event) {
   event.preventDefault();
   linkUnitC.classList.remove("active");
   linkUnitF.classList.add("active");
+
   let newTempF = Math.round((currentTemp * 9) / 5 + 32);
   let temp = document.querySelector("#temperature");
   let unit = document.querySelector("#currentUnit");
@@ -189,6 +188,7 @@ function showUnitCtemp(event) {
   event.preventDefault();
   linkUnitF.classList.remove("active");
   linkUnitC.classList.add("active");
+
   let temp = document.querySelector("#temperature");
   let unit = document.querySelector("#currentUnit");
   let high = document.querySelector("#high");
@@ -205,6 +205,7 @@ let currentTemp = null;
 let currentHigh = null;
 let currentLow = null;
 let currentFeel = null;
+let apiunit = "metric";
 
 let linkUnitF = document.querySelector("#unitF");
 linkUnitF.addEventListener("click", showUnitFtemp);
