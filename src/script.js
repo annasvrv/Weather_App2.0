@@ -43,28 +43,46 @@ function formatDay(timestamp) {
   return `${month} ${day} ${year} ${hours}:${minutes}`;
 }
 
-function displayForecast() {
+function formatWeekDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  let day = days[date.getDay()];
+
+  return day;
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily.slice(1, 8);
+
   let forecastElement = document.querySelector("#forecast-display");
 
   let forecastHTML = `<div class="row">`;
 
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `      
+  forecast.forEach(function (forecastDay, i) {
+    if (i < 7) {
+      forecastHTML =
+        forecastHTML +
+        `      
                      <div class="col weekday">
-                        <div class="week-day">${day}</div>
+                        <div class="week-day">${formatWeekDay(
+                          forecastDay.dt
+                        )}</div>
+                        
                         <div class="icon-forecast">
                           <img
-                            src="http://openweathermap.org/img/wn/10d@2x.png"
+                            src="http://openweathermap.org/img/wn/${
+                              forecastDay.weather[0].icon
+                            }@2x.png"
                             alt=""
                             width="40px"
                           />
                         </div>
-                        <div class="temp-forecast">25º</div>
+                        <div class="temp-forecast">${Math.round(
+                          forecastDay.temp.day
+                        )}º</div>
                       </div>
                     `;
+    }
   });
 
   forecastHTML = forecastHTML + `</div>`;
