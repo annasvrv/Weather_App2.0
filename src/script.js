@@ -86,6 +86,8 @@ function displayForecast(response) {
   forecastHTML = forecastHTML + `</div>`;
 
   forecastElement.innerHTML = forecastHTML;
+
+  forecastTemp = forecast;
 }
 
 function getForecast(coordinates) {
@@ -176,12 +178,18 @@ function showUnitFtemp(event) {
   let high = document.querySelector("#high");
   let low = document.querySelector("#low");
   let feel = document.querySelector("#realFeel");
+  let divTemp = document.getElementsByClassName("temp-forecast");
 
   temp.innerHTML = newTempF;
   unit.innerHTML = `ºF`;
   high.innerHTML = `H:${Math.round((currentHigh * 9) / 5 + 32)}ºF`;
   low.innerHTML = `L:${Math.round((currentLow * 9) / 5 + 32)}ºF`;
   feel.innerHTML = `${Math.round((currentFeel * 9) / 5 + 32)}ºF`;
+  for (i = 0; i < 7; i++) {
+    divTemp[i].innerHTML = `${Math.round(
+      (forecastTemp[i].temp.day * 9) / 5 + 32
+    )}º`;
+  }
 }
 
 function showUnitCtemp(event) {
@@ -194,11 +202,16 @@ function showUnitCtemp(event) {
   let high = document.querySelector("#high");
   let low = document.querySelector("#low");
   let feel = document.querySelector("#realFeel");
+  let divTemp = document.getElementsByClassName("temp-forecast");
+
   temp.innerHTML = Math.round(currentTemp);
   unit.innerHTML = `ºC`;
   high.innerHTML = `H:${Math.round(currentHigh)}ºC`;
   low.innerHTML = `L:${Math.round(currentLow)}ºC`;
   feel.innerHTML = `${Math.round(currentFeel)}ºC`;
+  for (i = 0; i < 7; i++) {
+    divTemp[i].innerHTML = `${Math.round(forecastTemp[i].temp.day)}º`;
+  }
 }
 
 let currentTemp = null;
@@ -206,6 +219,7 @@ let currentHigh = null;
 let currentLow = null;
 let currentFeel = null;
 let apiunit = "metric";
+let forecastTemp = [];
 
 let linkUnitF = document.querySelector("#unitF");
 linkUnitF.addEventListener("click", showUnitFtemp);
